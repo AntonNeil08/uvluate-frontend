@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* OTP Form Container - Centers Properly */
+.otp-container {
+  @apply p-6 rounded-lg shadow-lg w-full max-w-md mx-auto transition-all duration-300 flex flex-col items-center justify-center text-center;
+}
+
+/* Light & Dark Mode Styles */
+.otp-light {
+  @apply bg-white text-black;
+}
+
+.otp-dark {
+  @apply bg-gray-800 text-white;
+}
+
+/* OTP Title */
+.otp-title {
+  @apply text-2xl font-bold mb-4;
+}
+
+/* Error Alert */
+.otp-alert {
+  @apply mb-3;
+}
+
+/* OTP Description Text */
+.otp-text {
+  @apply text-sm text-gray-600 dark:text-gray-400 mb-4;
+}
+
+/* OTP Input Fields */
+.otp-input {
+  @apply w-12 h-12 text-2xl text-center border rounded-md transition-all duration-300;
+}
+
+/* Light Mode OTP Input */
+.otp-input-light {
+  @apply bg-white text-black border-gray-300;
+}
+
+/* Dark Mode OTP Input */
+.otp-input-dark {
+  @apply bg-gray-800 text-white border-gray-600;
+}
+
+/* Ensure focused OTP inputs maintain proper styling */
+.otp-input:focus {
+  @apply outline-none border-blue-500 ring-2 ring-blue-500;
+}
+
+/* Button Container */
+.otp-button-group {
+  @apply flex justify-between items-center w-full;
+}
+
+/* Send & Verify OTP Buttons */
+.otp-button {
+  @apply w-full transition-all duration-300 font-medium rounded-lg;
+}
+
+/* Light Mode Button (Green) */
+.otp-button-primary {
+  @apply bg-green-500 text-white border-green-600 hover:bg-green-600;
+}
+
+/* Dark Mode Button (Blue) */
+.dark .otp-button {
+  @apply bg-blue-500 text-white border-blue-600 hover:bg-blue-600;
+}
+
+/* Resend OTP Button */
+.otp-resend {
+  @apply text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 cursor-pointer;
+}
+
+/* Disabled Button */
+.otp-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Light Mode Disabled Button */
+.otp-button-primary:disabled {
+  @apply bg-green-300 border-green-400 text-white;
+}
+
+/* Dark Mode Disabled Button */
+.dark .otp-button:disabled {
+  @apply bg-blue-300 border-blue-400 text-white;
+}
+/* Resend OTP Button */
+.otp-resend {
+  @apply px-4 py-2 rounded-lg transition-all duration-300 font-medium;
+}
+
+/* Default Resend OTP Button (Enabled) */
+.otp-resend-enabled {
+  @apply bg-gray-700 text-white border-gray-500 hover:bg-gray-600;
+}
+
+/* Disabled Resend OTP Button (Better Contrast) */
+.otp-resend-disabled {
+  @apply bg-gray-800 text-gray-400 border-gray-600 opacity-50 cursor-not-allowed;
+}

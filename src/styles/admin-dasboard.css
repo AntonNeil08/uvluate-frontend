@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* Admin Dashboard Layout */
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* Main Content Area */
+.dashboard-content {
+  flex-grow: 1;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.dark .dashboard-content {
+  background-color: #1e293b;
+  color: white;
+}
+
+/* Content Area */
+.content-area {
+  max-width: 1200px;
+  margin: auto;
+}

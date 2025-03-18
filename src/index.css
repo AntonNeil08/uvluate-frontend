@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/* Reset and Normalize */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+.dark {
+  --bg-color: #1a1a1a;
+  --text-color: #f5f5f5;
+}
+
+/* Ensure Full Background Coverage */
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  @apply transition-colors duration-300;
+}
+
+body {
+  @apply flex items-center justify-center;
+}
+
+/* Basic Button Styling */
+button {
+  @apply px-4 py-2 rounded-lg font-medium transition-all focus:outline-none;
+}
+
+button.primary {
+  @apply bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800;
+}
+
+button.secondary {
+  @apply bg-gray-300 text-gray-900 hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+}
+
+/* Basic Input Styling */
+input, textarea {
+  @apply w-full px-4 py-2 border rounded-md transition-all duration-300;
+}
+
+input:focus, textarea:focus {
+  @apply border-blue-500 ring-1 ring-blue-500 outline-none;
+}
+
+/* Dark Mode Input */
+.dark input, .dark textarea {
+  @apply bg-gray-900 text-gray-100 border-gray-600;
+}
+
+.dark input:focus, .dark textarea:focus {
+  @apply bg-gray-800 text-gray-100 border-gray-500 ring-1 ring-gray-500;
+}

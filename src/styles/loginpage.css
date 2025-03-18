@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* Login Page Container */
+.login-page {
+  @apply flex flex-col justify-center items-center h-screen transition-all duration-300;
+}
+
+/* Light & Dark Mode Styles */
+.login-page-light {
+  @apply bg-gray-100 text-black;
+}
+
+.login-page-dark {
+  @apply bg-gray-900 text-white;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  @apply absolute top-4 right-4;
+}
+
+/* Switch Styling */
+.theme-switch {
+  @apply flex items-center cursor-pointer;
+}
+
+.theme-switch .ant-switch {
+  @apply transition-all duration-300;
+}
+
+/* Forms */
+.form-container {
+  @apply w-full max-w-md p-6 rounded-lg shadow-lg transition-all duration-300;
+}
+
+.form-light {
+  @apply bg-white text-black;
+}
+
+.form-dark {
+  @apply bg-gray-800 text-white;
+}
+
+.breadcrumbs-container {
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
