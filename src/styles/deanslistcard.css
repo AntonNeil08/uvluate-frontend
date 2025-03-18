@@ -1,0 +1,36 @@
+/* DeanListCard.css */
+.dean-card {
+    min-width: 280px; /* 🔹 Fixed width for horizontal layout */
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 16px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  /* 🔹 Hover effect */
+  .dean-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* 🔹 Card title (Name + ID) */
+  .dean-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  /* 🔹 Department Info */
+  .dean-card-info {
+    font-size: 0.875rem;
+    color: #4b5563;
+  }
+  
+  /* 🔹 User ID styling */
+  .dean-student-id {
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+  
+

@@ -1,0 +1,41 @@
+/* Create Dean Form - Dark Green Background */
+.dean-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height */
+  background-color: #064635; /* Dark Green Background */
+}
+
+/* Card Design */
+.dean-form-card {
+  max-width: 450px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+
+/* Form Title */
+.dean-form-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #064635; /* Dark Green */
+}
+
+/* Submit Button */
+.dean-form-button {
+  width: 100%;
+  background-color: #064635; /* Dark Green */
+  border: none;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+}
+
+.dean-form-button:hover {
+  background-color: #052c24; /* Slightly darker green */
+}
