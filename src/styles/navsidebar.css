@@ -7,6 +7,7 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  background-color: white; /* Ensure white background */
 }
 
 /* === Navbar === */
@@ -15,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
-  background-color: #1e293b;
+  background-color: #1e293b; /* Dark navy */
   color: white;
   height: 60px;
   width: 100%;
@@ -48,7 +49,7 @@
 
 /* Logout Button */
 .logout-button {
-  background-color: #16a34a;
+  background-color: #16a34a; /* Green */
   border: none;
   transition: background 0.3s;
 }
@@ -57,12 +58,12 @@
   background-color: #15803d;
 }
 
-/* === Layout === */
+/* === Layout Container (Sidebar + Content) === */
 .layout-container {
   display: flex;
-  flex: 1;
-  height: calc(100vh - 60px); /* Ensures it starts below navbar */
-  margin-top: 60px; /* Pushes below navbar */
+  flex-grow: 1;
+  height: calc(100vh - 60px); /* Adjusted to be under navbar */
+  margin-top: 60px;
 }
 
 /* === Sidebar === */
@@ -78,20 +79,26 @@
   top: 60px;
   bottom: 0;
   height: calc(100vh - 60px);
-  background-color: #1e293b;
+  background-color: #1e293b; /* Dark navy */
   color: white;
 }
 
+/* Sidebar when collapsed */
 .sidebar.collapsed {
   width: 80px;
 }
 
-/* Sidebar Toggle */
+/* Sidebar Toggle Button */
 .sidebar-toggle {
   cursor: pointer;
   font-size: 20px;
   text-align: center;
   margin-bottom: 10px;
+  transition: color 0.3s;
+}
+
+.sidebar-toggle:hover {
+  color: #3b82f6; /* Blue highlight */
 }
 
 /* Sidebar Menu */
@@ -108,7 +115,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, color 0.3s;
   color: white;
 }
 
@@ -120,8 +127,13 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Hide text when sidebar is collapsed */
 .sidebar-button span {
   margin-left: 10px;
+}
+
+.sidebar.collapsed .sidebar-button span {
+  display: none;
 }
 
 /* === User Card === */
@@ -152,10 +164,15 @@
 .settings-button {
   background-color: transparent;
   border: none;
+  transition: background 0.3s, color 0.3s;
 }
 
 .settings-button:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.settings-button .anticon {
+  color: white;
 }
 
 /* Sidebar Footer */
@@ -166,18 +183,64 @@
   color: #94a3b8;
 }
 
+.sidebar-footer-text {
+  margin-top: 10px;
+}
+
+/* Hide text in collapsed mode */
+.sidebar.collapsed .sidebar-footer-text {
+  display: none;
+}
+
 /* === Content Area === */
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  margin-left: 240px;
-  min-height: calc(100vh - 60px);
+  margin-left: 240px; /* Default sidebar width */
+  height: calc(100vh - 60px);
+  background-color: white; /* Fix dark issue */
   color: black;
   transition: margin-left 0.3s ease;
   overflow-y: auto;
 }
 
-/* Collapsed Sidebar Content Shift */
-.sidebar.collapsed ~ .main-content {
+/* Adjust when sidebar is collapsed */
+.sidebar.collapsed + .main-content {
   margin-left: 80px;
 }
+
+/* Ensure no extra gap between navbar and content */
+.content-area {
+  margin-top: 0;
+  padding: 20px;
+}
+
+/* === Sidebar Footer (Fix) === */
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* Pushes it to the bottom */
+    padding: 10px;
+    font-size: 12px;
+    color: #94a3b8;
+    flex-grow: 1; /* Ensures it takes available space */
+  }
+  
+  /* Ensure User Card and Footer Stack */
+  .sidebar-footer .user-card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #334155;
+  }
+  
+  .sidebar-footer .sidebar-footer-text {
+    text-align: center;
+    width: 100%;
+    margin-top: 8px; /* Space from user card */
+  }
+  

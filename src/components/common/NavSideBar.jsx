@@ -67,7 +67,7 @@ const NavSidebar = ({ navigationItems, children }) => {
             ))}
           </div>
 
-          {/* User Card */}
+          {/* User Card & Footer */}
           <div className="sidebar-footer">
             {!collapsed ? (
               <div className="user-card">
