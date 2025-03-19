@@ -1,41 +1,52 @@
-/* Create Dean Form - Dark Green Background */
+/* Form Wrapper */
+.dean-form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #034500f1;
+    padding: 20px;
+}
+
+/* Form Card */
 .dean-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full height */
-  background-color: #064635; /* Dark Green Background */
+    background: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 500%;
+    max-width: 800px;
 }
 
-/* Card Design */
-.dean-form-card {
-  max-width: 450px;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  background: #fff;
-}
-
-/* Form Title */
+/* Title */
 .dean-form-title {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #064635; /* Dark Green */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+}
+
+/* Form Input Fields */
+.ant-form-item-label > label {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Input Fields */
+.ant-input {
+    height: 40px;
+    font-size: 16px;
 }
 
 /* Submit Button */
-.dean-form-button {
-  width: 100%;
-  background-color: #064635; /* Dark Green */
-  border: none;
-  font-size: 1rem;
-  padding: 10px;
-  border-radius: 8px;
-  color: white;
+.submit-button {
+    width: 100%;
+    background-color: #1890ff;
+    height: 40px;
+    font-size: 16px;
 }
 
-.dean-form-button:hover {
-  background-color: #052c24; /* Slightly darker green */
+.submit-button:hover {
+    background-color: #0077cc;
 }
