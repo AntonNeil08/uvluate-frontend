@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Card, Row, Col } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import "../../styles/createdeanform.css";
+import "../../styles/createadminform.css";
 
-const CreateDeanForm = () => {
+const CreateAdminForm = () => {
     const [form] = Form.useForm();
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ const CreateDeanForm = () => {
     return (
         <div className="dean-form-wrapper">
             <Card className="dean-form-container">
-                <h2 className="dean-form-title">DEAN FORM</h2>
+                <h2 className="dean-form-title">ADMIN FORM</h2>
                 <Form form={form} layout="vertical" onFinish={handleSubmit} initialValues={{ password: id }}>
                     <Row gutter={16}>
                         <Col span={12}>
@@ -58,11 +58,7 @@ const CreateDeanForm = () => {
                                 <Input placeholder="Enter Email" style={{ width: '100%' }} />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
-                            <Form.Item label="Department" name="department" rules={[{ required: true, message: "Required" }]}> 
-                                <Input placeholder="Enter Department" style={{ width: '100%' }} />
-                            </Form.Item>
-                        </Col>
+                        
                     </Row>
 
                     <Row gutter={16}>
@@ -98,4 +94,4 @@ const CreateDeanForm = () => {
     );
 };
 
-export default CreateDeanForm;
+export default CreateAdminForm;

@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #067000f1;
+    background-color: #044d00f1;
     padding: 20px;
 }
 
@@ -42,7 +42,7 @@
 /* Submit Button */
 .submit-button {
     width: 100%;
-    background-color: #1890ff;
+    background-color: #073b6c;
     height: 40px;
     font-size: 16px;
 }
