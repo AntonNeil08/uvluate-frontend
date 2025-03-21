@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Main Page Container */
+.student-page {
+  @apply flex flex-col h-full w-full items-center p-6;
+}
+
+/* Button Container - Fixed at the Top */
+.button-container {
+  @apply flex justify-center gap-4 bg-white p-4 w-full shadow-md sticky top-0 z-10;
+}
+
+/* Content Area - Scrollable if Needed */
+.content-area {
+  @apply w-full max-w-5xl flex-grow overflow-auto mt-4;
+}
+
+/* Placeholder Message */
+.placeholder-message {
+  @apply text-center text-gray-500 text-lg p-4;
+}

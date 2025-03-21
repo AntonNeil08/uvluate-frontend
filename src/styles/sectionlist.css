@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+.section-container {
+  @apply w-full p-4 bg-white shadow-md rounded-lg;
+}
+
+.section-header {
+  @apply flex justify-between items-center mb-3;
+}
+
+.section-list {
+  @apply flex flex-wrap gap-2 items-center;
+}
+
+.section-item {
+  @apply flex items-center gap-2;
+}
+
+.edit-icon {
+  @apply text-gray-500 cursor-pointer;
+}
+
+.edit-icon:hover {
+  @apply text-blue-500;
+}
+
+.section-delete-button {
+  @apply bg-red-500 text-white font-bold px-4 py-2 rounded-lg;
+}
+
+.section-delete-button:hover {
+  @apply bg-red-600;
+}
+
+.section-spinner {
+  @apply flex justify-center w-full;
+}

@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+.irregular-card {
+  @apply flex items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50;
+}
+
+.student-info {
+  @apply flex flex-col;
+}
+
+.student-name {
+  @apply font-semibold text-lg;
+}
+
+.student-id {
+  @apply text-gray-600 text-sm;
+}

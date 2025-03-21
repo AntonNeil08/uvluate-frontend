@@ -1,0 +1,41 @@
+.department-container {
+  width: 100%;
+  padding: 16px;
+  background: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.department-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.department-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.department-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.edit-icon {
+  color: gray;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  color: #1890ff;
+}
+
+.department-spinner {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

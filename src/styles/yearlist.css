@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.year-container {
+  @apply w-full p-4 bg-white shadow-md rounded-lg;
+}
+
+.year-header {
+  @apply flex justify-between items-center mb-3;
+}
+
+.year-list {
+  @apply flex flex-wrap gap-2;
+}
+
+.year-item {
+  @apply flex items-center gap-2;
+}
+
+.year-spinner {
+  @apply flex justify-center w-full;
+}
