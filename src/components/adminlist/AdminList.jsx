@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { apiGet } from "../../utils/apiHelper";
 import AdminListCard from "./AdminListCard";
-import { Spin, Alert } from "antd";
+import { Spin, Alert, Select, Input } from "antd";
 import "../../styles/adminlist.css";
+
+const { Option } = Select;
 
 const AdminList = () => {
   const [admins, setAdmins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     const fetchAdmins = async () => {
@@ -25,46 +28,49 @@ const AdminList = () => {
     fetchAdmins();
   }, []);
 
-  const handleEdit = (admin) => {
-    console.log("Edit admin", admin);
-  };
+  const handleEdit = (admin) => console.log("Edit", admin);
+  const handleResetPassword = (admin) => console.log("Reset Password", admin);
+  const handleToggleStatus = (admin) => console.log("Toggle Status", admin);
 
-  const handleResetPassword = (admin) => {
-    console.log("Reset password for", admin);
-  };
+  const filteredAdmins = admins.filter((admin) => {
+    const matchesSearch =
+      admin.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
+      admin.last_name.toLowerCase().includes(searchText.toLowerCase()) ||
+      admin.email.toLowerCase().includes(searchText.toLowerCase());
 
-  const handleToggleStatus = (admin) => {
-    console.log("Toggle status for", admin);
-  };
+    const matchesStatus =
+      statusFilter === "all"
+        ? true
+        : statusFilter === "active"
+        ? admin.user_type > 0
+        : admin.user_type < 0;
 
-  const filteredAdmins = admins.filter((admin) =>
-    `${admin.first_name} ${admin.middle_name} ${admin.last_name} ${admin.suffix} ${admin.email} ${admin.id}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  );
+    return matchesSearch && matchesStatus;
+  });
 
-  if (loading)
-    return (
-      <div className="flex-center-screen">
-        <Spin tip="Loading admins..." />
-      </div>
-    );
+  if (loading) return <Spin tip="Loading admins..." />;
   if (error) return <Alert type="error" message={error} />;
 
   return (
     <div className="admin-list-container">
-      <h1 className="admin-list-title">Manage Users</h1>
-
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search admin by name, email, or ID..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-bar"
+      <h2 className="admin-list-title">Manage Users</h2>
+      <div className="search-filter-container">
+        <Input
+          placeholder="Search admin by name, email, or ID"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          style={{ width: "250px" }}
         />
+        <Select
+          defaultValue="all"
+          style={{ width: 150 }}
+          onChange={(value) => setStatusFilter(value)}
+        >
+          <Option value="all">All</Option>
+          <Option value="active">Active</Option>
+          <Option value="inactive">Inactive</Option>
+        </Select>
       </div>
-
       <div className="admin-list-scroll">
         {filteredAdmins.length > 0 ? (
           filteredAdmins.map((admin) => (
@@ -77,7 +83,7 @@ const AdminList = () => {
             />
           ))
         ) : (
-          <p className="admin-list-empty">No admin found.</p>
+          <p className="admin-list-empty">No admins found.</p>
         )}
       </div>
     </div>
