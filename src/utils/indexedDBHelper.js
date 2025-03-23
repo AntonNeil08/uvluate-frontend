@@ -16,7 +16,10 @@ export const useIndexedDB = (storeName) => ({
   async add(value) {
     return (await dbPromise).put(storeName, value);
   },
-  async remove(key) { // ✅ Renamed from `delete` → `remove`
+  async remove(key) {
     return (await dbPromise).delete(storeName, key);
+  },
+  async clear() {
+    return (await dbPromise).clear(storeName); // ✅ Clear all entries
   },
 });

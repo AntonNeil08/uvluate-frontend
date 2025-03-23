@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal, Input, List, message, Button, Checkbox } from "antd";
-import { apiGet, apiPost } from "../../utils/apiHelper";
+import { apiGet, apiPost, apiJsonPost } from "../../utils/apiHelper";
 import { useIndexedDB } from "../../utils/indexedDBHelper"; // ✅ IndexedDB helper
 import "../../styles/selectsubjectoverlay.css"; // ✅ Separate CSS file
 
@@ -76,31 +76,34 @@ const SelectSubjectOverlay = ({ isOpen, onClose, sectionId, onRefetch }) => {
   
     try {
       const payload = {
-        section: sectionId, // ✅ Ensure correct key name
-        subject_codes: selectedSubjects, // ✅ Ensure this is an array
+        section_id: sectionId, // ✅ Aligned with backend
+        subject_codes: selectedSubjects,
       };
   
-      console.log("Sending payload:", payload); // ✅ Debugging
+      console.log("Sending payload:", payload);
   
-      const response = await apiPost("/deployment/add-subject", payload);
+      const response = await apiJsonPost("/deployment/assign-subject", payload);
   
       if (response.success) {
         message.success("Subjects assigned successfully!");
   
-        // ✅ Save assigned subjects to IndexedDB
         await Promise.all(
           selectedSubjects.map(async (subjectCode) => {
             const subject = subjects.find((s) => s.code === subjectCode);
             if (subject) {
-              await add({ section_id: sectionId, subject_code: subject.code, subject_name: subject.subject_name });
+              await add({
+                section_id: sectionId,
+                subject_code: subject.code,
+                subject_name: subject.subject_name,
+              });
             }
           })
         );
   
-        onRefetch(); // ✅ Refresh deployment list
+        onRefetch();
         onClose();
       } else {
-        message.error(response.messages?.message || "Failed to assign subjects.");
+        message.error(response.message || "Failed to assign subjects.");
       }
     } catch (error) {
       message.error("An error occurred while assigning subjects.");

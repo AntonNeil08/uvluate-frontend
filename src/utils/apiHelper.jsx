@@ -114,3 +114,17 @@ export const apiDelete = async (url, data = {}) => {
     return handleError(error);
   }
 };
+
+export const apiJsonPost = async (url, data = {}) => {
+  try {
+    const response = await api.post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+

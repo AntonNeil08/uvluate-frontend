@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 import { apiGet } from "../utils/apiHelper";
 import { Spin, message } from "antd";
 import IrregularDeploymentCard from "../components/student/deployment/IrregularDeploymentCard";
-import "../styles/irregularstudentpage.css"; // ✅ External CSS
+import "../styles/irregularstudentpage.css";
 
 const IrregularStudentAssignmentPage = () => {
-  const { sectionId } = useParams(); // ✅ Get section ID from URL
+  const { sectionId } = useParams();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Fetch irregular students by section
   const fetchIrregularStudents = async () => {
     setLoading(true);
     try {
@@ -30,16 +30,40 @@ const IrregularStudentAssignmentPage = () => {
     fetchIrregularStudents();
   }, [sectionId]);
 
+  const filteredStudents = students.filter((student) => {
+    const fullName = `${student.first_name} ${student.middle_name || ""} ${student.last_name} ${student.suffix || ""}`.toLowerCase();
+    return (
+      student.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      fullName.includes(searchQuery.toLowerCase())
+    );
+  });
+
   return (
     <div className="irregular-student-container">
       <h3 className="text-lg font-semibold">Assign Irregular Students</h3>
 
+      <div className="search-bar-container">
+      <input
+        type="text"
+        id="student-search"
+        name="studentSearch"
+        placeholder="Search by ID or name..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-input"
+      />
+      </div>
+
       {loading ? (
         <Spin className="irregular-spinner" />
-      ) : students.length > 0 ? (
+      ) : filteredStudents.length > 0 ? (
         <div className="irregular-student-list">
-          {students.map((student) => (
-            <IrregularDeploymentCard key={student.id} student={student} onRefetch={fetchIrregularStudents} />
+          {filteredStudents.map((student) => (
+            <IrregularDeploymentCard
+              key={student.id}
+              student={student}
+              onRefetch={fetchIrregularStudents}
+            />
           ))}
         </div>
       ) : (

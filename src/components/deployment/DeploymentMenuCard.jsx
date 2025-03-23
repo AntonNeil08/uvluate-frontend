@@ -1,50 +1,50 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Tooltip, message } from "antd";
 import { DeleteOutlined, UserSwitchOutlined } from "@ant-design/icons";
 import { apiPost, apiDelete } from "../../utils/apiHelper";
-import SelectInstructorOverlay from "./SelectInstructorOverlay"; // ✅ New overlay for instructor selection
-import { useIndexedDB } from "../../utils/indexedDBHelper"; // ✅ Import IndexedDB helper
-import "../../styles/deploymentmenucard.css"; // ✅ External CSS
+import SelectInstructorOverlay from "./SelectInstructorOverlay";
+import { useIndexedDB } from "../../utils/indexedDBHelper";
+import "../../styles/deploymentmenucard.css";
 
 const DeploymentMenuCard = ({ deployment, onRefetch }) => {
-const [selectedInstructor, setSelectedInstructor] = useState(deployment.instructor_name || "---");
-const [loading, setLoading] = useState(false);
-const [isOverlayOpen, setIsOverlayOpen] = useState(false); // ✅ Controls overlay visibility
-const { remove } = useIndexedDB("assignedSubjects"); // ✅ Get remove function from IndexedDB
+  const [selectedInstructor, setSelectedInstructor] = useState(deployment.instructor_name || "---");
+  const [loading, setLoading] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const { remove } = useIndexedDB("assignedSubjects");
 
-const handleDelete = async () => {
-  setLoading(true);
+  const handleDelete = async () => {
+    setLoading(true);
 
-  const response = await apiDelete(`/deployment/delete/${deployment.evaluation_id}`);
+    const response = await apiDelete(`/deployment/delete/${deployment.section_assignment_id}`);
 
-  if (response.success) {
-    message.success("Deployment removed successfully!");
+    if (response.success) {
+      message.success("Deployment removed successfully!");
 
+      try {
+        await remove(deployment.subject_code);
+      } catch (error) {
+        console.warn("IndexedDB removal failed", error);
+      }
 
-    try {
-      await remove(deployment.subject_code);
-    } catch (error) {
+      onRefetch();
+    } else {
+      message.error(response.message || "Failed to remove deployment.");
     }
 
-    onRefetch(); // ✅ Refresh UI
-  } else {
-    message.error(response.message || "Failed to remove deployment.");
-  }
-
-  setLoading(false);
-};
+    setLoading(false);
+  };
 
   const handleInstructorChange = async (newInstructor) => {
     setLoading(true);
 
-    const response = await apiPost("/deployment/deploy-instructor", {
-      evaluation_id: deployment.evaluation_id,
+    const response = await apiPost("/deployment/assign-instructor", {
+      section_assignment_id: deployment.section_assignment_id,
       instructor_id: newInstructor.id,
     });
 
     if (response.success) {
       message.success("Instructor updated successfully!");
-      setSelectedInstructor(newInstructor.name); // ✅ Update displayed instructor name
+      setSelectedInstructor(newInstructor.name);
       onRefetch();
     } else {
       message.error("Failed to update instructor.");
@@ -61,32 +61,45 @@ const handleDelete = async () => {
         <span className="deployment-subject">{deployment.subject_name}</span>
       </div>
 
-      {/* Instructor Selection - Opens Overlay */}
+      {/* Instructor */}
       <div className="deployment-column">
         <label className="deployment-label">Assigned Instructor</label>
-        <Button type="link" icon={<UserSwitchOutlined />} onClick={() => setIsOverlayOpen(true)}>
-          {selectedInstructor}
-        </Button>
+        <Tooltip title={deployment.is_deployed === "Y" ? "Already Deployed" : "Change Instructor"}>
+          <Button
+            type="link"
+            icon={<UserSwitchOutlined />}
+            onClick={() => setIsOverlayOpen(true)}
+            disabled={deployment.is_deployed === "Y"} // ✅ Disable if deployed
+          >
+            {selectedInstructor}
+          </Button>
+        </Tooltip>
       </div>
 
-      {/* Start On and Ends On Dates */}
+      {/* Start / End Dates */}
       <div className="deployment-column">
         <label className="deployment-label">Started On</label>
-        <span className="deployment-date">{deployment.started_on ? deployment.started_on : "N/A"}</span>
+        <span className="deployment-date">{deployment.started_on || "N/A"}</span>
       </div>
       <div className="deployment-column">
         <label className="deployment-label">Ends On</label>
-        <span className="deployment-date">{deployment.end_on ? deployment.end_on : "N/A"}</span>
+        <span className="deployment-date">{deployment.ended_on || "N/A"}</span>
       </div>
 
-      {/* Delete Button (Only if NOT deployed) */}
+      {/* Delete Button (Only for Non-Deployed) */}
       {deployment.is_deployed === "N" && (
         <Tooltip title="Remove Deployment">
-          <Button danger icon={<DeleteOutlined />} onClick={handleDelete} loading={loading} />
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={handleDelete}
+            loading={loading}
+            disabled={loading}
+          />
         </Tooltip>
       )}
 
-      {/* Instructor Selection Overlay */}
+      {/* Instructor Overlay */}
       {isOverlayOpen && (
         <SelectInstructorOverlay
           isOpen={isOverlayOpen}

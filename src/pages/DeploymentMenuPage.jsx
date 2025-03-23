@@ -7,7 +7,6 @@ import DeploymentMenuCard from "../components/deployment/deploymentMenuCard";
 import SelectSubjectOverlay from "../components/deployment/SelectSubjectOverlay";
 import { useIndexedDB } from "../utils/indexedDBHelper";
 import "../styles/deploymentmenupage.css";
-import dayjs from "dayjs"; // ✅ Date formatting
 
 const DeploymentMenuPage = () => {
   const { sectionId } = useParams();
@@ -18,7 +17,12 @@ const DeploymentMenuPage = () => {
   const [startDate, setStartDate] = useState(null); // ✅ Start Date
   const [endDate, setEndDate] = useState(null); // ✅ End Date
   const [isModalOpen, setIsModalOpen] = useState(false); // ✅ Controls the modal visibility
-  const { getAll, add } = useIndexedDB("assignedSubjects");
+  const { getAll, add, remove, clear } = useIndexedDB("assignedSubjects");
+  const department = JSON.parse(localStorage.getItem("department"));
+  const program = JSON.parse(localStorage.getItem("program"));
+  const year = JSON.parse(localStorage.getItem("year"));
+  const section = JSON.parse(localStorage.getItem("section"));
+
 
   // Fetch deployments by section
   const fetchDeployments = async () => {
@@ -27,14 +31,25 @@ const DeploymentMenuPage = () => {
       navigate("/");
       return;
     }
-
+  
     setLoading(true);
+  
     try {
-      const response = await apiGet(`/deployment/deployments-by-section/${sectionId}`);
+      // ✅ Clear the IndexedDB store before inserting new data
+      await clear();
+  
+      // ✅ Fetch deployments from the backend
+      const response = await apiGet(`/deployment/evaluations-by-section/${sectionId}`);
+  
       if (response.success) {
-        setDeployments(response.data);
+        const deploymentsData = response.data;
+  
+        // ✅ Update React state with deployments
+        setDeployments(deploymentsData);
+  
+        // ✅ Add each subject to IndexedDB after clearing
         await Promise.all(
-          response.data.map((deployment) =>
+          deploymentsData.map((deployment) =>
             add({
               section_id: sectionId,
               subject_code: deployment.subject_code,
@@ -43,13 +58,16 @@ const DeploymentMenuPage = () => {
           )
         );
       } else {
-        message.error("Failed to fetch deployments.");
+        message.error("Failed to fetch evaluations.");
       }
     } catch (error) {
-      message.error("An error occurred while fetching deployments.");
+      console.error("Error fetching deployments:", error);
+      message.error("An error occurred while fetching evaluations.");
     }
+  
     setLoading(false);
   };
+  
 
   useEffect(() => {
     fetchDeployments();
@@ -57,11 +75,11 @@ const DeploymentMenuPage = () => {
 
   const handleAddSubject = async (subject) => {
     setLoading(true);
-    const response = await apiPost("/deployment/add-subjects", {
+    const response = await apiPost("/deployment/assign-subject", {
       section: sectionId,
       subject_codes: [subject.code],
-    });
-
+    }); // ✅ updated endpoint
+  
     if (response.success) {
       message.success(`Subject "${subject.subject_name}" added successfully!`);
       await add({
@@ -73,9 +91,9 @@ const DeploymentMenuPage = () => {
     } else {
       message.error("Failed to assign subject.");
     }
-
+  
     setLoading(false);
-  };
+  };  
 
   // ✅ Handle Deploy Evaluation Request
   const handleDeployEvaluation = async () => {
@@ -83,28 +101,30 @@ const DeploymentMenuPage = () => {
       message.error("Please select both start and end dates.");
       return;
     }
-
+  
     setLoading(true);
-    const response = await apiPost("/deployment/start-evaluation", {
+    const response = await apiPost("/deployment/deploy", {
       section_id: sectionId,
-      start_date: startDate.format("YYYY-MM-DD"),
-      end_date: endDate.format("YYYY-MM-DD"),
-    });
-
+      started_on: startDate.format("YYYY-MM-DD"),
+      ended_on: endDate.format("YYYY-MM-DD"),
+    }); // ✅ updated endpoint
+  
     if (response.success) {
       message.success("Evaluation deployed successfully!");
       fetchDeployments();
     } else {
       message.error("Failed to deploy evaluation.");
     }
-
+  
     setLoading(false);
-    setIsModalOpen(false); // ✅ Close the modal after deployment
-  };
+    setIsModalOpen(false);
+  };  
 
   return (
     <div className="deployment-menu-container">
-      <h3 className="text-lg font-semibold">Deployment Menu</h3>
+      <h3 className="text-lg font-semibold">
+        Deployment Menu for {department?.name}, {program?.name}, Year {year?.name}, Section {section?.name}
+      </h3>
   
       {loading ? (
         <Spin className="deployment-spinner" />
@@ -113,7 +133,7 @@ const DeploymentMenuPage = () => {
           {deployments.length > 0 ? (
             deployments.map((deployment) => (
               <DeploymentMenuCard
-                key={deployment.evaluation_id}
+              key={deployment.section_assignment_id}
                 deployment={deployment}
                 onRefetch={fetchDeployments}
               />
@@ -202,15 +222,26 @@ const DeploymentMenuPage = () => {
           </div>
         </div>
       </Modal>
+      {/* Deploy Irregular Button */}
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "0.5rem" }}>
+        <Tooltip title="Assign Irregular Students">
+          <Button
+            type="default"
+            onClick={() => navigate(`/deployment/irregular/${sectionId}`)}
+          >
+            Deploy Irregular
+          </Button>
+        </Tooltip>
+      </div>
       {/* Notice for Irregular Students */}
       <div className="evaluation-notice">
-            <Alert
-              message="Note"
-              description="Irregular students' evaluation needs to be assigned manually."
-              type="warning"
-              showIcon
-            />
-            </div>
+        <Alert
+          message="Note"
+          description="Irregular students' evaluation needs to be assigned manually."
+          type="warning"
+          showIcon
+          />
+        </div>
     </div>
   );
 };

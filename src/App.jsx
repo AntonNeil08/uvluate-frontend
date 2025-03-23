@@ -6,6 +6,7 @@ import DashboardLayout from './templates/DashboardLayout';
 import AdminManageDepartmentPage from './pages/AdminManageDepartment';
 import DeploymentMenuPage from './pages/DeploymentMenuPage';
 import IrregularStudentAssignmentPage from './pages/IrregularStudentAssignmentPage';
+import ManageStudentPage from './pages/ManageStudentPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/admin/departments" element={<DashboardLayout><AdminManageDepartmentPage /></DashboardLayout>} />
         <Route path="/deployment/section/:sectionId" element={<DeploymentMenuPage/>} />
         <Route path="/deployment/irregular/:sectionId" element={<IrregularStudentAssignmentPage />} />
+        <Route path="/deployment/manage-student/:studentID" element={<ManageStudentPage/>}/>
       </Routes>
     </Router>
   );
