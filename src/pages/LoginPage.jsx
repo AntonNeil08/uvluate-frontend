@@ -5,23 +5,17 @@ import LoginForm from "../components/authentication/LoginForm";
 import OTPForm from "../components/authentication/OTPForm";
 import { Switch } from "antd";
 import { MoonOutlined, SunOutlined } from "@ant-design/icons";
-import "../styles/LoginPage.css";
+import "../styles/loginpage.css";
 
 const LoginPage = () => {
   const [showOTP, setShowOTP] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem("theme") === "dark");
   const navigate = useNavigate();
 
-  // Handles theme toggle and dispatches an event
   const toggleTheme = () => {
     const newMode = !darkMode;
     setDarkMode(newMode);
     localStorage.setItem("theme", newMode ? "dark" : "light");
-
-    // Dispatch custom event
     window.dispatchEvent(new CustomEvent("themeChange", { detail: newMode ? "dark" : "light" }));
   };
 
@@ -30,59 +24,27 @@ const LoginPage = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    // Event listener for mode changes
-    const handleThemeChange = (event) => {
-      console.log(`Theme changed to: ${event.detail}`);
-    };
-
-    window.addEventListener("themeChange", handleThemeChange);
-    return () => {
-      window.removeEventListener("themeChange", handleThemeChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Listen for OTP verification event
     const handleOTPVerified = async () => {
       const userId = localStorage.getItem("user_id");
       const userType = localStorage.getItem("user_type");
 
-      if (!userId || !userType) {
-        console.error("User ID or User Type is missing");
-        return;
-      }
+      if (!userId || !userType) return;
 
-      // Generate JWT
       const jwtResponse = await apiPost("auth/generate-jwt", { user_id: userId, user_type: userType });
 
       if (jwtResponse.success) {
         localStorage.setItem("token", jwtResponse.data.token);
 
-        // Redirect based on user type
-        switch (userType) {
-          case "1":
-            navigate("/admin-dashboard");
-            break;
-          case "2":
-            navigate("/dean-dashboard");
-            break;
-          case "3":
-            navigate("/coordinator-dashboard");
-            break;
-          case "4":
-            navigate("/faculty-dashboard");
-            break;
-          case "5":
-            navigate("/student-dashboard");
-            break;
-          case "6":
-            navigate("/privileged-faculty-dashboard");
-            break;
-          default:
-            navigate("/login"); // Fallback if user type is invalid
-        }
-      } else {
-        console.error("Failed to generate JWT:", jwtResponse.message);
+        const userRoutes = {
+          "1": "/admin-dashboard",
+          "2": "/dean-dashboard",
+          "3": "/coordinator-dashboard",
+          "4": "/faculty-dashboard",
+          "5": "/student-dashboard",
+          "6": "/privileged-faculty-dashboard",
+        };
+
+        navigate(userRoutes[userType] || "/login");
       }
     };
 
@@ -94,7 +56,18 @@ const LoginPage = () => {
 
   return (
     <div className={`login-page ${darkMode ? "login-page-dark" : "login-page-light"}`}>
-      {/* Dark Mode Toggle */}
+      <div className="login-content">
+        <div className="welcome-text">
+          <h1>Hi! Welcome to UVluate</h1>
+          <p>An AI-powered platform for faculty performance assessment, fostering feedback-driven improvement.</p>
+          <p className="copyright-text">© 2025 UVluate</p>
+        </div>
+
+        <div className={`form-container ${darkMode ? "form-dark" : "form-light"}`}>
+          {!showOTP ? <LoginForm onSuccess={() => setShowOTP(true)} /> : <OTPForm />}
+        </div>
+      </div>
+
       <div className="theme-toggle">
         <Switch
           checked={darkMode}
@@ -104,17 +77,6 @@ const LoginPage = () => {
           className="theme-switch"
         />
       </div>
-
-      {/* Form Switching */}
-      {!showOTP ? (
-        <div className={`form-container ${darkMode ? "form-dark" : "form-light"}`}>
-          <LoginForm onSuccess={() => setShowOTP(true)} />
-        </div>
-      ) : (
-        <div className={`form-container ${darkMode ? "form-dark" : "form-light"}`}>
-          <OTPForm />
-        </div>
-      )}
     </div>
   );
 };

@@ -1,52 +1,55 @@
 @import "tailwindcss";
 
+/* === Page Wrapper (Full Width) === */
+.faculty-wrapper {
+    @apply flex flex-col justify-start w-full min-h-screen bg-gray-100; /* Remove padding */
+}
+
+/* === Main Form Wrapper (Full Width, No Extra Padding) === */
 .form-wrapper {
-    @apply flex justify-center items-start min-h-screen bg-white pt-6; /* Reduced top padding */
-    
+    @apply flex justify-start w-full; /* Align form to the left */
 }
 
+/* === Form Container (Ensure Left Alignment) === */
 .form-container {
-    @apply bg-white p-10 rounded-xl shadow-lg w-full max-w-6xl;
-    background-color: #FBFBFB; 
+    @apply bg-white rounded-xl shadow-lg w-full h-full max-w-5xl p-8;
+    background-color: #e4e4e4;
+    margin-top: 10px;
 }
 
-/* Adding a Soft Shadow */
-.shadow-lg {
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); /* Soft, professional shadow */
-}
-
+/* === Form Title === */
 .form-title {
-    @apply text-2xl font-bold mb-7 text-black; /* Added 'mb-6' for margin-bottom */
+    @apply text-2xl font-bold mb-7 text-gray-800;
 }
 
+/* === Form Grid Layout (Proper Alignment) === */
 .form-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4;
+    @apply grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 w-full;
 }
 
-/* Label Styling */
-.ant-form-item-label > label {
-    @apply text-gray-800 font-medium text-sm;
+/* === Label Styling === */
+.form-label {
+    @apply text-gray-700 text-sm font-semibold mb-1;
 }
 
-/* Input Field Styling */
+/* === Input Fields === */
 .ant-input,
 .ant-input-password {
-    @apply rounded-lg border-none  shadow-sm text-sm px-4 py-2 w-full;
-    
+    @apply rounded-lg border shadow-sm text-sm px-4 py-2 w-full;
+    border-color: #ccc;
 }
 
-/* Error Messages */
-.ant-form-item-explain {
-    @apply text-red-500 text-xs mt-1;
+/* === Full-Width Inputs (For Single-Column Fields) === */
+.full-width {
+    @apply col-span-2;
 }
 
-/* Button Styling */
-.submit-button {
-    @apply bg-blue-600 text-white font-medium px-28 py-5 rounded-lg transition hover:bg-blue-700;
-}
-
-/* Center Button */
+/* === Submit Button Container (Align Left) === */
 .form-actions {
-    @apply col-span-2 flex justify-center mt-4;
+    @apply flex justify-center col-span-2 mt-4;
 }
 
+/* === Submit Button === */
+.submit-button {
+    @apply bg-blue-600 text-white font-medium px-28 py-3 rounded-lg transition hover:bg-blue-700;
+}
