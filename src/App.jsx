@@ -8,7 +8,7 @@ import DeploymentMenuPage from './pages/DeploymentMenuPage';
 import IrregularStudentAssignmentPage from './pages/IrregularStudentAssignmentPage';
 import ManageStudentPage from './pages/ManageStudentPage';
 import StudentDashboard from './pages/StudentDashboard';
-
+import StudentSideEvaluation from './pages/StudentSideEvaluation';
 function App() {
   return (
     <Router>
@@ -21,6 +21,7 @@ function App() {
         <Route path="/deployment/irregular/:sectionId" element={<IrregularStudentAssignmentPage />} />
         <Route path="/deployment/manage-student/:studentID" element={<ManageStudentPage/>}/>
         <Route path="/student-dashboard" element={<DashboardLayout><StudentDashboard/></DashboardLayout>} />
+        <Route path="/student/evaluate/:assignmentId" element={<DashboardLayout><StudentSideEvaluation/></DashboardLayout>} />
       </Routes>
     </Router>
   );
