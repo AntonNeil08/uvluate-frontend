@@ -2,21 +2,28 @@
 
 /* OTP Form Container - Centers Properly */
 .otp-container {
-  @apply p-6 rounded-lg shadow-lg w-full max-w-md mx-auto transition-all duration-300 flex flex-col items-center justify-center text-center;
+  @apply p-2 rounded-lg shadow-lg w-full max-w-md mx-auto transition-all duration-300 flex flex-col items-center justify-center text-center;
+  box-shadow: none;
+  width: 298px;
+  height: 345px;
+  margin-top: -20px;
 }
 
 /* Light & Dark Mode Styles */
 .otp-light {
-  @apply bg-white text-black;
+  @apply  text-black;
 }
 
 .otp-dark {
-  @apply bg-gray-800 text-white;
+  @apply  text-white;
+  box-shadow: none;
+  color: black;
 }
 
 /* OTP Title */
 .otp-title {
   @apply text-2xl font-bold mb-4;
+  margin-bottom: 16px;
 }
 
 /* Error Alert */
@@ -26,32 +33,39 @@
 
 /* OTP Description Text */
 .otp-text {
-  @apply text-sm text-gray-600 dark:text-gray-400 mb-4;
+  @apply  text-sm dark:text-gray-400 mb-4;
+  margin-top: -10px;
+  margin-bottom: 16px;
 }
 
 /* OTP Input Fields */
 .otp-input {
-  @apply w-12 h-12 text-2xl text-center border rounded-md transition-all duration-300;
-}
-
-/* Light Mode OTP Input */
-.otp-input-light {
-  @apply bg-white text-black border-gray-300;
-}
-
-/* Dark Mode OTP Input */
-.otp-input-dark {
-  @apply bg-gray-800 text-white border-gray-600;
+  @apply w-12 h-10 text-xl text-center border border-gray-300 rounded-lg transition-all duration-300 bg-white outline-none;
 }
 
 /* Ensure focused OTP inputs maintain proper styling */
 .otp-input:focus {
-  @apply outline-none border-blue-500 ring-2 ring-blue-500;
+  @apply border-black ring-0 outline-none;
 }
+
+
+
+
+/* Light Mode OTP Input */
+.otp-input-light {
+  @apply bg-white text-black border-gray-800;
+ 
+}
+
+
+/* Ensure focused OTP inputs maintain proper styling */
+
 
 /* Button Container */
 .otp-button-group {
   @apply flex justify-between items-center w-full;
+  margin-top: 10px
+  
 }
 
 /* Send & Verify OTP Buttons */
