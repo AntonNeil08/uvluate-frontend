@@ -20,12 +20,13 @@ const DepartmentList = ({ onDepartmentChange }) => {
     if (response.success) {
       setDepartments(response.data);
 
-      // ✅ Get department from local storage or default to the first one
-      const storedDepartment = JSON.parse(localStorage.getItem("department")) || {};
-      const departmentExists = response.data.some((dept) => dept.id === storedDepartment.id);
+      // ✅ Get department ID and name separately from localStorage
+      const storedId = localStorage.getItem("department");
+      const storedName = localStorage.getItem("department_name");
 
+      const departmentExists = response.data.some((dept) => dept.id === parseInt(storedId));
       const defaultDepartment = departmentExists
-        ? storedDepartment
+        ? { id: parseInt(storedId), name: storedName }
         : response.data.length > 0
         ? { id: response.data[0].id, name: response.data[0].department_name }
         : null;
@@ -34,7 +35,8 @@ const DepartmentList = ({ onDepartmentChange }) => {
 
       // ✅ Trigger event if a default department is set
       if (defaultDepartment) {
-        localStorage.setItem("department", JSON.stringify(defaultDepartment));
+        localStorage.setItem("department", defaultDepartment.id);
+        localStorage.setItem("department_name", defaultDepartment.name);
         if (onDepartmentChange) {
           onDepartmentChange(defaultDepartment);
         }
@@ -73,7 +75,8 @@ const DepartmentList = ({ onDepartmentChange }) => {
     if (selectedDepartment?.id !== deptId) {
       const newDepartment = { id: deptId, name: deptName };
       setSelectedDepartment(newDepartment);
-      localStorage.setItem("department", JSON.stringify(newDepartment));
+      localStorage.setItem("department", newDepartment.id);
+      localStorage.setItem("department_name", newDepartment.name);
 
       // ✅ Broadcast CustomEvent when the department changes
       const departmentEvent = new CustomEvent("departmentChange", {
@@ -122,7 +125,11 @@ const DepartmentList = ({ onDepartmentChange }) => {
       )}
 
       {isEditOpen && (
-        <EditDepartmentOverlay department={editDepartment} onClose={() => setIsEditOpen(false)} onRefetch={fetchDepartments} />
+        <EditDepartmentOverlay
+          department={editDepartment}
+          onClose={() => setIsEditOpen(false)}
+          onRefetch={fetchDepartments}
+        />
       )}
 
       {isCreateOpen && (

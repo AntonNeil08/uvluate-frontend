@@ -10,7 +10,7 @@ const SelectInstructorOverlay = ({ isOpen, onClose, onSelect }) => {
 
   useEffect(() => {
     const fetchInstructors = async () => {
-      const response = await apiGet("/faculty/list");
+      const response = await apiGet("/user/list");
       if (response.success) {
         const formattedInstructors = response.data.map((instructor) => ({
           id: instructor.id,

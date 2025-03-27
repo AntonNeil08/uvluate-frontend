@@ -40,7 +40,8 @@ const LoginForm = ({ onSuccess }) => {
 
     if (response.success) {
       localStorage.setItem("user_id", userId);
-      localStorage.setItem("username", response.data.username);
+      localStorage.setItem("email", response.data.email);
+      localStorage.setItem("honorifics", response.data.honorifics || "");
       localStorage.setItem("user_type", response.data.user_type);
       localStorage.setItem("first_name", response.data.first_name || "");
       localStorage.setItem("last_name", response.data.last_name || "");
@@ -48,8 +49,10 @@ const LoginForm = ({ onSuccess }) => {
       localStorage.setItem("suffix", response.data.suffix || "");
 
       if (response.data.user_type !== "5") {
-        localStorage.setItem("department", response.data.department ? response.data.department.toString() : "");
-        localStorage.setItem("program", response.data.program ? response.data.program.toString() : "");
+        localStorage.setItem("department", response.data.department_id ? response.data.department_id.toString() : "");
+        localStorage.setItem("program", response.data.program_id ? response.data.program_id.toString() : "");
+        localStorage.setItem("department_name", response.data.department || "");
+        localStorage.setItem("program_name", response.data.program || "");
       }
 
       onSuccess();

@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { apiGet } from "../../utils/apiHelper";
 import { Button, Spin, Tooltip } from "antd";
 import { PlusOutlined, SettingOutlined } from "@ant-design/icons";
 import CreateSectionOverlay from "./CreateSectionOverlay";
 import EditSectionOverlay from "./EditSectionOverlay";
-import "../../styles/sectionlist.css"; // ✅ External CSS
+import "../../styles/sectionlist.css";
 
 const SectionList = ({ onSectionChange }) => {
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSection, setSelectedSection] = useState(null);
-  const [year, setYear] = useState(JSON.parse(localStorage.getItem("year")) || null);
+  const [year, setYear] = useState(() => {
+    const id = localStorage.getItem("year");
+    const name = localStorage.getItem("year_name");
+    return id && name ? { id: parseInt(id), name } : null;
+  });
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editSection, setEditSection] = useState(null);
-  const navigate = useNavigate(); // ✅ Add useNavigate for navigation
 
   const fetchSections = async (yr) => {
     if (!yr || !yr.id) return;
     setLoading(true);
+
     const response = await apiGet(`/academic/sections/by-year/${yr.id}`);
-    if (response.success) {
-      setSections(response.data);
-    }
+    if (response.success) setSections(response.data);
+
     setLoading(false);
   };
 
@@ -34,6 +36,7 @@ const SectionList = ({ onSectionChange }) => {
       fetchSections(newYear);
       setSelectedSection(null);
       localStorage.removeItem("section");
+      localStorage.removeItem("section_name");
     };
 
     window.addEventListener("yearChange", handleYearChange);
@@ -47,16 +50,17 @@ const SectionList = ({ onSectionChange }) => {
     }
   }, [year]);
 
-  // ✅ Navigate to the new tab when selecting a section
   const handleSectionSelect = (sectionId, sectionName) => {
     setSelectedSection({ id: sectionId, name: sectionName });
-    localStorage.setItem("section", JSON.stringify({ id: sectionId, name: sectionName }));
+    localStorage.setItem("section", sectionId);
+    localStorage.setItem("section_name", sectionName);
 
     if (onSectionChange) {
       onSectionChange({ id: sectionId, name: sectionName });
     }
 
-    navigate(`/deployment/section/${sectionId}`); // ✅ Redirect to the deployment page
+    // ✅ Open deployment link in new tab
+    window.open(`/deployment/section/${sectionId}`, "_blank");
   };
 
   const openEditOverlay = (section) => {
@@ -99,7 +103,11 @@ const SectionList = ({ onSectionChange }) => {
       )}
 
       {isEditOpen && (
-        <EditSectionOverlay section={editSection} onClose={() => setIsEditOpen(false)} onRefetch={() => fetchSections(year)} />
+        <EditSectionOverlay
+          section={editSection}
+          onClose={() => setIsEditOpen(false)}
+          onRefetch={() => fetchSections(year)}
+        />
       )}
     </div>
   );

@@ -2,54 +2,53 @@ import { useEffect, useState } from "react";
 import { apiGet, apiPost } from "../../utils/apiHelper";
 import { Button, Spin, Tooltip, message } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import "../../styles/yearlist.css"; // ✅ External CSS
+import "../../styles/yearlist.css";
 
 const YearList = ({ onYearChange }) => {
   const [years, setYears] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(null);
-  const [program, setProgram] = useState(
-    JSON.parse(localStorage.getItem("program")) || null
-  );
+  const [program, setProgram] = useState(() => {
+    const id = localStorage.getItem("program");
+    const name = localStorage.getItem("program_name");
+    return id && name ? { id: parseInt(id), name } : null;
+  });
 
-  // Fetch years when program changes
   const fetchYears = async (prog) => {
     if (!prog || !prog.id) return;
-
     setLoading(true);
+
     const response = await apiGet(`/academic/year-levels/by-program/${prog.id}`);
     if (response.success) {
       setYears(response.data);
 
-      // ✅ Get year from localStorage or default to the first one
-      const storedYear = JSON.parse(localStorage.getItem("year")) || {};
-      const yearExists = response.data.some((yr) => yr.id === storedYear.id);
+      const storedYear = {
+        id: localStorage.getItem("year"),
+        name: localStorage.getItem("year_name"),
+      };
 
+      const yearExists = response.data.some((yr) => yr.id === parseInt(storedYear.id));
       const defaultYear = yearExists
-        ? storedYear
+        ? { id: parseInt(storedYear.id), name: storedYear.name }
         : response.data.length > 0
         ? { id: response.data[0].id, name: response.data[0].year_level }
         : null;
 
       setSelectedYear(defaultYear);
 
-      // ✅ Trigger event if a default year is set
       if (defaultYear) {
-        localStorage.setItem("year", JSON.stringify(defaultYear));
-        if (onYearChange) {
-          onYearChange(defaultYear);
-        }
+        localStorage.setItem("year", defaultYear.id);
+        localStorage.setItem("year_name", defaultYear.name);
+        if (onYearChange) onYearChange(defaultYear);
 
-        const yearEvent = new CustomEvent("yearChange", {
-          detail: defaultYear,
-        });
+        const yearEvent = new CustomEvent("yearChange", { detail: defaultYear });
         window.dispatchEvent(yearEvent);
       }
     }
+
     setLoading(false);
   };
 
-  // Listen for program changes
   useEffect(() => {
     const handleProgramChange = (event) => {
       const newProgram = event.detail;
@@ -58,42 +57,33 @@ const YearList = ({ onYearChange }) => {
     };
 
     window.addEventListener("programChange", handleProgramChange);
-
-    return () => {
-      window.removeEventListener("programChange", handleProgramChange);
-    };
+    return () => window.removeEventListener("programChange", handleProgramChange);
   }, []);
 
   useEffect(() => {
-    if (program) {
-      fetchYears(program);
-    }
+    if (program) fetchYears(program);
   }, [program]);
 
   const handleYearSelect = (yearId, yearLevel) => {
     if (selectedYear?.id !== yearId) {
       const newYear = { id: yearId, name: yearLevel };
       setSelectedYear(newYear);
-      localStorage.setItem("year", JSON.stringify(newYear));
+      localStorage.setItem("year", newYear.id);
+      localStorage.setItem("year_name", newYear.name);
 
-      // ✅ Broadcast CustomEvent when the year changes
       const yearEvent = new CustomEvent("yearChange", {
         detail: newYear,
       });
       window.dispatchEvent(yearEvent);
 
-      if (onYearChange) {
-        onYearChange(newYear);
-      }
+      if (onYearChange) onYearChange(newYear);
     }
   };
 
   const handleDeleteYear = async () => {
     if (years.length === 0) return;
-
-    const lastYear = years[years.length - 1]; // Get the last year
+    const lastYear = years[years.length - 1];
     const response = await apiPost(`/academic/delete/year/${lastYear.id}`);
-
     if (response.success) {
       message.success(`Year ${lastYear.year_level} deleted successfully!`);
       fetchYears(program);
@@ -108,7 +98,6 @@ const YearList = ({ onYearChange }) => {
       return;
     }
 
-    // ✅ Determine the next year based on the last year in the list
     const lastYear = years.length > 0 ? parseInt(years[years.length - 1].year_level) : 0;
     const newYearLevel = lastYear + 1;
 
@@ -135,7 +124,7 @@ const YearList = ({ onYearChange }) => {
         <Spin className="year-spinner" />
       ) : (
         <div className="year-list">
-          {years.map((yr, index) => (
+          {years.map((yr) => (
             <div key={yr.id} className="year-item">
               <Button
                 type={selectedYear?.id === yr.id ? "primary" : "default"}
@@ -146,16 +135,14 @@ const YearList = ({ onYearChange }) => {
             </div>
           ))}
 
-          {/* Special Last Year Button with Delete */}
           {years.length > 0 && (
             <Tooltip title={`Delete Year "${years[years.length - 1].year_level}"`}>
               <Button danger onClick={handleDeleteYear} className="year-delete-button">
-                 {years[years.length - 1].year_level} <DeleteOutlined /> 
+                {years[years.length - 1].year_level} <DeleteOutlined />
               </Button>
             </Tooltip>
           )}
 
-          {/* Add Year Button */}
           <Tooltip title="Add Year Level">
             <Button type="dashed" shape="circle" icon={<PlusOutlined />} onClick={handleAddYear} />
           </Tooltip>

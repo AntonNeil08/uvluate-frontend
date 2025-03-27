@@ -1,0 +1,91 @@
+.evaluation-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+  }
+  
+  .evaluation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .logo {
+    height: 80px;
+    max-width: 100%;
+  }
+  
+  .intro-text {
+    text-align: justify;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .info-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .evaluation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  
+  .evaluation-table th,
+  .evaluation-table td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  .evaluation-table th:first-child,
+  .evaluation-table td:first-child {
+    text-align: left;
+  }
+  
+  .aspect-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .aspect-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .signature-pad {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  
+  .signature-canvas {
+    width: 100%;
+    height: 150px;
+    background-color: #fff;
+  }
+  
+  .evaluation-footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 2rem;
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+  }
+  

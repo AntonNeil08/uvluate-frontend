@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/apiHelper";
+import { useParams } from "react-router-dom";
 import {
   Card,
   Typography,
@@ -61,12 +61,12 @@ const questions = {
 };
 
 const StudentSideEvaluation = () => {
-  const { assignmentId } = useParams();
-  const [details, setDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
-  const [responses, setResponses] = useState({});
-  const [comments, setComments] = useState({});
+    const { assignmentId } = useParams();
+    const [details, setDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
+    const [responses, setResponses] = useState({});
+    const [comments, setComments] = useState({});
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -140,7 +140,10 @@ const StudentSideEvaluation = () => {
     setSubmitting(false);
 
     if (res.success) {
-      message.success("Evaluation submitted successfully.");
+        setTimeout(() => {
+            window.location.href = "/student-dashboard"; // force refresh
+          }, 1000); // optional delay for UX
+         message.success("Evaluation submitted successfully.");
     } else {
       message.error(res.message || "Failed to submit evaluation.");
     }
