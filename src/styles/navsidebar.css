@@ -7,7 +7,7 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background-color: white; /* Ensure white background */
+  background-color: #031a09; /* Dark green */
 }
 
 /* === Navbar === */
@@ -16,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
-  background-color: #1e293b; /* Dark navy */
+  background-color: #294e28; /* Olive Green */
   color: white;
   height: 60px;
   width: 100%;
@@ -73,14 +73,15 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 20px 10px;
-  transition: width 0.3s ease;
+  transition: width 0.3s ease-in-out;
   position: fixed;
   left: 0;
   top: 60px;
   bottom: 0;
   height: calc(100vh - 60px);
-  background-color: #1e293b; /* Dark navy */
+  background-color: #316c40; /* Dark spring green */
   color: white;
+  border-radius: 0px 15px 15px 0px;
 }
 
 /* Sidebar when collapsed */
@@ -98,7 +99,7 @@
 }
 
 .sidebar-toggle:hover {
-  color: #3b82f6; /* Blue highlight */
+  color: #e2f87b; /* Modern green */
 }
 
 /* Sidebar Menu */
@@ -119,6 +120,7 @@
   color: white;
 }
 
+/* Sidebar button hover effect */
 .sidebar-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
@@ -136,58 +138,17 @@
   display: none;
 }
 
-/* === User Card === */
-.user-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: #334155;
+/* Center icons when collapsed */
+.sidebar.collapsed .sidebar-button {
+  justify-content: center;
 }
 
-.user-info {
-  text-align: left;
+/* Hide user info when collapsed */
+.sidebar.collapsed .user-info {
+  display: none;
 }
 
-.user-name {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.user-id {
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-/* Settings Button (Gear Icon) */
-.settings-button {
-  background-color: transparent;
-  border: none;
-  transition: background 0.3s, color 0.3s;
-}
-
-.settings-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.settings-button .anticon {
-  color: white;
-}
-
-/* Sidebar Footer */
-.sidebar-footer {
-  text-align: center;
-  padding: 10px;
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-.sidebar-footer-text {
-  margin-top: 10px;
-}
-
-/* Hide text in collapsed mode */
+/* Hide footer text when collapsed */
 .sidebar.collapsed .sidebar-footer-text {
   display: none;
 }
@@ -198,9 +159,9 @@
   padding: 20px;
   margin-left: 240px; /* Default sidebar width */
   height: calc(100vh - 60px);
-  background-color: white; /* Fix dark issue */
-  color: black;
-  transition: margin-left 0.3s ease;
+  background-color: #031a09; /* Dark green */
+  color: white;
+  transition: margin-left 0.3s ease-in-out;
   overflow-y: auto;
 }
 
@@ -208,39 +169,3 @@
 .sidebar.collapsed + .main-content {
   margin-left: 80px;
 }
-
-/* Ensure no extra gap between navbar and content */
-.content-area {
-  margin-top: 0;
-  padding: 20px;
-}
-
-/* === Sidebar Footer (Fix) === */
-.sidebar-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end; /* Pushes it to the bottom */
-    padding: 10px;
-    font-size: 12px;
-    color: #94a3b8;
-    flex-grow: 1; /* Ensures it takes available space */
-  }
-  
-  /* Ensure User Card and Footer Stack */
-  .sidebar-footer .user-card {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #334155;
-  }
-  
-  .sidebar-footer .sidebar-footer-text {
-    text-align: center;
-    width: 100%;
-    margin-top: 8px; /* Space from user card */
-  }
-  

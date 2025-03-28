@@ -1,0 +1,39 @@
+.subject-card {
+  background-color: #294E28;
+  border: 1px solid #316C40;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 8px 0;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #FDFFF6;
+}
+
+.subject-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #E2F87B;
+}
+
+.subject-card p {
+  margin: 4px 0;
+  color: #FDFFF6;
+}
+
+.action-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-icons span {
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.action-icons span:hover {
+  color: #E2F87B;
+}

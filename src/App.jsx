@@ -15,6 +15,7 @@ import DeanReports from './pages/DeanReports';
 import EvaluationResults from './pages/EvaluationResults';
 import DeanAcknowledgementList from './pages/DeanAcknowledgementList';
 import AcknowledgeResultsPage from './pages/AcknowledgeResultPage';
+import Managesubject from './components/managesubject/managesubject';
 function App() {
   return (
     <Router>
@@ -34,6 +35,7 @@ function App() {
         <Route path="/evaluation/results/:facultyID" element={<EvaluationResults/>}/>
         <Route path="/dean/acknowledgement/list" element={<DeanAcknowledgementList/>}/>
         <Route path="/dean/acknowledge-result/:facultyID" element ={<AcknowledgeResultsPage/>}/>
+        <Route path="/Managesubject/bahalanako" element ={<Managesubject/>}/>
       </Routes>
     </Router>
   );
