@@ -1,0 +1,52 @@
+/* Form Wrapper */
+.dean-form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #067000f1;
+    padding: 20px;
+}
+
+/* Form Card */
+.dean-form-container {
+    background: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 500%;
+    max-width: 800px;
+}
+
+/* Title */
+.dean-form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+}
+
+/* Form Input Fields */
+.ant-form-item-label > label {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Input Fields */
+.ant-input {
+    height: 40px;
+    font-size: 16px;
+}
+
+/* Submit Button */
+.submit-button {
+    width: 100%;
+    background-color: #1890ff;
+    height: 40px;
+    font-size: 16px;
+}
+
+.submit-button:hover {
+    background-color: #0077cc;
+}

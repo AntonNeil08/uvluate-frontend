@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiPost } from "../../utils/apiHelper";
-import { Input, Button, Alert } from "antd";
+import { Input, Button, Alert, message} from "antd";
 import "../../styles/otpform.css"; // Import CSS file
 
 const OTPForm = () => {
@@ -94,7 +94,7 @@ const OTPForm = () => {
       // Dispatch the OTP verified event
       window.dispatchEvent(new CustomEvent("otpVerified"));
     } else {
-      setError(otpResponse.message || "OTP Verification Failed.");
+      message.error(otpResponse.message || "OTP Verification Failed.");
     }
   };
 
@@ -111,7 +111,7 @@ const OTPForm = () => {
 
   return (
     <div className={`otp-container ${darkMode ? "otp-dark" : "otp-light"}`}>
-    <h2 className="otp-title">Enter OTP</h2>
+    <h2 className="otp-title">Email Verification</h2>
 
     {error && <Alert message={error} type="error" showIcon className="otp-alert" />}
 
@@ -133,7 +133,7 @@ const OTPForm = () => {
     ) : (
         <>
         <p className="otp-text">
-            OTP sent to: <strong>{email}</strong>
+            Enter the verification code sent to your email. {email}
         </p>
 
         <div className="flex justify-center gap-2 mb-4">

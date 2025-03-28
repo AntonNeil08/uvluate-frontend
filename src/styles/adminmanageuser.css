@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Main Container */
+.admin-manage-user {
+  @apply p-6 flex flex-col h-full;
+}
+
+/* Page Title */
+.admin-title {
+  @apply text-3xl font-bold text-gray-800 mb-4;
+}
+
+/* User Role Tabs */
+.user-tabs {
+  @apply flex justify-center space-x-4 mb-4;
+}
+
+/* Content Wrapper */
+.content-container {
+  @apply flex-grow flex justify-center items-start;
+}
+
+/* Content Area */
+.content-area {
+  @apply w-full max-w-5xl bg-white p-6 shadow-md rounded-lg;
+}
+
+/* Placeholder Message */
+.placeholder-message {
+  @apply text-center text-gray-500;
+}

@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+.subject-search-bar {
+  @apply w-full mb-3 p-2 border rounded-md shadow-sm;
+}
+
+.subject-list {
+  @apply max-h-60 overflow-y-auto border rounded-md shadow-sm;
+}
+
+.subject-item {
+  @apply cursor-pointer p-2 hover:bg-gray-100 border-b flex items-center gap-2;
+}
+
+.assign-button-container {
+  @apply flex justify-center mt-4;
+}

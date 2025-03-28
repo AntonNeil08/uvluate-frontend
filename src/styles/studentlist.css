@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* Student List Container */
+.student-list {
+  @apply p-6 flex flex-col gap-4;
+}
+
+/* Search Bar */
+.search-bar {
+  @apply w-full md:w-1/3 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Filters Container */
+.filters {
+  @apply flex flex-wrap gap-4 justify-start items-center mb-4;
+}
+
+/* Filter Dropdowns */
+.filter-dropdown {
+  @apply w-40 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .filters {
+    @apply flex-col items-start gap-2;
+  }
+
+  .search-bar {
+    @apply w-full;
+  }
+
+  .filter-dropdown {
+    @apply w-full;
+  }
+}

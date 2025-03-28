@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+.program-container {
+    @apply w-full max-w-md mx-auto p-4 bg-white shadow-md rounded-lg;
+}
+
+.program-list {
+    @apply flex flex-col gap-2;
+}
+
+.program-item {
+    @apply flex items-center justify-between p-2 border rounded-lg shadow-sm;
+}
+
+.program-button {
+    @apply flex-grow text-left;
+}
+
+.edit-icon {
+    @apply text-gray-500 cursor-pointer ml-2;
+}
+
+.add-program {
+    @apply flex justify-center mt-3;
+}
+
+.program-spinner {
+    @apply flex justify-center w-full;
+}

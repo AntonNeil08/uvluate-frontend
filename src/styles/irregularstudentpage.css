@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.irregular-student-container {
+  @apply w-full p-4 bg-white shadow-md rounded-lg;
+}
+
+.irregular-student-list {
+  @apply flex flex-col gap-2;
+}
+
+.irregular-spinner {
+  @apply flex justify-center w-full;
+}

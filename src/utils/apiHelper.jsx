@@ -9,11 +9,9 @@ const api = axios.create({
 // ✅ Request Interceptor for Debugging
 api.interceptors.request.use(
   (request) => {
-    console.log("🟢 Axios Request:", request);
     return request;
   },
   (error) => {
-    console.error("❌ Axios Request Error:", error);
     return Promise.reject(error);
   }
 );
@@ -21,11 +19,9 @@ api.interceptors.request.use(
 // ✅ Response Interceptor for Debugging
 api.interceptors.response.use(
   (response) => {
-    console.log("🟢 Axios Response:", response);
     return response;
   },
   (error) => {
-    console.error("❌ Axios Response Error:", error);
     return Promise.reject(error);
   }
 );
@@ -40,7 +36,6 @@ const toFormData = (data) => {
   const formData = new FormData();
 
   Object.entries(data).forEach(([key, value]) => {
-    console.log(`📤 Appending: ${key} =>`, value);
 
     if (value instanceof File || value instanceof Blob) {
       formData.append(key, value, value.name);
@@ -57,9 +52,7 @@ const toFormData = (data) => {
     }
   });
 
-  console.log("🔹 Final FormData Contents Before Sending:");
   for (let pair of formData.entries()) {
-    console.log(`${pair[0]}:`, pair[1]);
   }
 
   return formData;
@@ -79,18 +72,12 @@ export const apiGet = async (url, params = {}) => {
 export const apiPost = async (url, data = {}) => {
   try {
     let formData = toFormData(data); // ✅ Convert data to FormData
-
-    console.log("📤 API Request to:", url);
-    console.log("📦 FormData Before Sending:");
     for (let pair of formData.entries()) {
-      console.log(`${pair[0]}:`, pair[1]); // Debugging output
     }
 
     const response = await api.post(url, formData); // ✅ No need to set headers, Axios handles it
-    console.log("✅ API Response:", response.data);
     return response.data;
   } catch (error) {
-    console.error("❌ API Error:", error.response?.data || error.message);
     return handleError(error);
   }
 };
@@ -127,3 +114,17 @@ export const apiDelete = async (url, data = {}) => {
     return handleError(error);
   }
 };
+
+export const apiJsonPost = async (url, data = {}) => {
+  try {
+    const response = await api.post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+

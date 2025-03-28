@@ -1,115 +1,95 @@
 @import "tailwindcss";
 
-/* Login Form Container */
+/* 🔹 Login Form Container */
 .login-container {
-  @apply p-6 rounded-lg shadow-lg w-full max-w-md mx-4 md:mx-auto transition-all duration-300;
+  @apply flex flex-col items-center justify-center w-full max-w-md p-2 rounded-lg shadow-lg transition;
+  height: 340px;
+  width: 360px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* Light & Dark Mode Styles */
+/* 🔹 Light & Dark Modes */
 .login-light {
-  @apply bg-white text-black;
+  @apply bg-white text-gray-900;
 }
 
 .login-dark {
   @apply bg-gray-800 text-white;
 }
 
-/* Login Title */
+/* 🔹 Title */
 .login-title {
-  @apply text-2xl font-bold mb-4 text-center;
+  @apply text-2xl font-bold mb-4 text-green-700 dark:text-green-400;
+  text-align: center;
+  margin-top: -30px
 }
 
-/* Error Alert */
+/* 🔹 Alert Message */
 .login-alert {
-  @apply mb-3;
+  @apply w-full mb-4;
 }
 
-/* Form Styles */
+/* 🔹 Login Form */
 .login-form {
-  @apply space-y-4;
+  @apply w-full flex flex-col gap-4 items-center; /* Center elements */
+  padding: 20px;
+  display: flex;
+  align-items: center; /* Center fields horizontally */
+  justify-content: center;
 }
 
-/* Labels */
-.login-label {
-  @apply block text-sm font-medium;
-}
-
-/* Inputs */
+/* 🔹 Input Fields with Light Gray Border */
 .login-input {
-  @apply w-full transition-all duration-300 px-4 py-2 border rounded-md;
+  @apply w-[280px] h-9 px-3 text-sm rounded-full bg-white text-gray-700 border border-gray-300 transition  focus:ring-blue-400 focus:border-blue-400 shadow-sm;
+  background: transparent !important;
 }
 
-/* Light Mode Input */
-.login-input-light {
-  @apply bg-white text-black border-gray-300;
+
+/* Remove outline and border for password input */
+.login-input input {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-/* Dark Mode Input */
-.login-input-dark {
-  @apply bg-gray-800 text-white border-gray-600;
+/* 🔹 Password Icon */
+.password-icon {
+  @apply text-gray-200;
 }
 
-/* Ensure focused inputs keep background color & remove white edges */
-.dark input:focus,
-.dark .ant-input:focus,
-.dark .ant-input-password input:focus {
-  @apply bg-gray-800 text-white border-blue-500 ring-1 ring-blue-500 outline-none;
-}
-
-/* Remove unwanted white edges on password input */
-.dark .ant-input-password {
-  @apply bg-gray-800 border-gray-600 text-white;
-}
-
-.dark .ant-input-password:hover,
-.dark .ant-input-password:focus-within {
-  @apply border-blue-500 ring-1 ring-blue-500;
-}
-
-/* Ensure disabled input text is visible */
-.dark input:disabled,
-.dark .ant-input:disabled,
-.dark .ant-input-password input:disabled {
-  @apply bg-gray-800 text-gray-400 border-gray-700;
-}
-
-/* Buttons */
+/* 🔹 Login Button */
 .login-button {
-  @apply w-full py-2 transition-all duration-300 font-medium rounded-lg;
+  @apply w-[293px] py-3 mt-4 bg-[#046012] text-white font-semibold rounded-lg transition hover:bg-[#03430d];
+  border-radius: 36px;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
 }
 
-/* Light Mode Button (Green) */
-.login-button-primary {
-  @apply bg-green-500 text-white border-green-600 hover:bg-green-600;
-}
-
-/* Dark Mode Button (Blue) */
 .dark .login-button {
-  @apply bg-blue-500 text-white border-blue-600 hover:bg-blue-600;
+  @apply bg-green-500;
 }
 
-/* Disabled Button Styles */
-.login-button:disabled {
-  @apply opacity-50 cursor-not-allowed;
+.dark .login-title {
+   color: #4b4b4b;
 }
 
-/* Light Mode Disabled (Faded Green) */
-.login-button-primary:disabled {
-  @apply bg-green-300 border-green-400 text-white;
-}
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    @apply p-6;
+    height: 50px;
+    
+  
+  }
 
-/* Dark Mode Disabled (Faded Blue) */
-.dark .login-button:disabled {
-  @apply bg-blue-300 border-blue-400 text-white;
-}
-/* Ensure the eye icon is white in dark mode */
-.dark .anticon-eye,
-.dark .anticon-eye-invisible {
-  @apply text-white;
-}
+  .login-title {
+    @apply text-2xl;
+    
+  }
 
-/* Keep it black in light mode */
-.anticon-eye,
-.anticon-eye-invisible {
-  @apply text-black;
+  .login-button {
+    @apply py-2;
+  }
 }

@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+.deployment-menu-container {
+  @apply w-full p-4 bg-white shadow-md rounded-lg;
+}
+
+.deployment-menu-list {
+  @apply flex flex-col gap-2;
+}
+
+.deployment-card {
+  @apply flex items-center gap-6 p-4 border rounded-lg shadow-sm w-full bg-gray-50;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Column Styles for Proper Alignment */
+.deployment-column {
+  @apply flex flex-col items-start justify-center min-w-[150px];
+}
+
+.deployment-label {
+  @apply text-gray-600 text-xs uppercase font-bold tracking-wide mb-1;
+}
+
+.deployment-subject {
+  @apply font-semibold text-lg truncate;
+  max-width: 250px;
+}
+
+.deployment-instructor {
+  @apply flex items-center gap-2;
+}
+
+.deployment-date {
+  @apply text-gray-700 text-sm font-medium text-center min-w-[100px];
+}
+
+/* Centered Buttons */
+.add-subject-button {
+  @apply flex justify-center mt-6;
+}
+
+/* Centered Deploy Evaluation Button */
+.deploy-evaluation-container {
+  @apply flex justify-center mt-6;
+}
+
+/* Notice for Irregular Students (Now Below Deploy Button) */
+.evaluation-notice {
+  @apply flex justify-center mt-2;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Search Bar */
+.search-bar {
+  @apply w-full mb-2 p-2 border rounded-md shadow-sm;
+}
+
+/* Instructor List */
+.instructor-list {
+  @apply max-h-60 overflow-y-auto border rounded-md shadow-sm;
+}
+
+/* Instructor Item */
+.instructor-item {
+  @apply cursor-pointer p-2 hover:bg-gray-100 border-b;
+}
+
+.instructor-item:last-child {
+  @apply border-none;
+}
+
+/* Center Loading Spinner */
+.deployment-spinner {
+  @apply flex justify-center w-full;
+}

@@ -1,0 +1,39 @@
+/* DeanList.css */
+.dean-list-container {
+  padding: 24px;
+}
+
+.dean-list-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+/* 🔹 Horizontal scrolling enabled */
+.dean-list-scroll {
+  display: flex;
+  gap: 16px; /* Space between cards */
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+  white-space: nowrap; /* Prevent cards from wrapping */
+}
+
+/* 🔹 Custom scrollbar for Webkit browsers */
+.dean-list-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.dean-list-scroll::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 10px;
+}
+
+/* Empty message */
+.dean-list-empty {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1rem;
+}

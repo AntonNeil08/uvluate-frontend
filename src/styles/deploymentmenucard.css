@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Deployment Card Container */
+.deployment-card {
+  @apply flex items-center p-4 border rounded-lg shadow-sm w-full;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Label Styling */
+.deployment-label {
+  @apply text-gray-500 text-xs uppercase font-bold tracking-wide;
+}
+
+/* Subject Name - Ensures Proper Width */
+.deployment-subject {
+  @apply font-medium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 200px;
+}
+
+/* Instructor Name */
+.instructor-button {
+  @apply text-blue-600 flex items-center;
+  white-space: nowrap;
+}
+
+/* Date Fields */
+.deployment-date {
+  @apply text-gray-600 text-sm;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Delete Button */
+.delete-button {
+  @apply text-red-500 hover:text-red-700;
+}

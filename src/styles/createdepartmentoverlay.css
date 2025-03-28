@@ -1,0 +1,36 @@
+.create-department-modal {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+  
+  .close-btn {
+    color: gray;
+  }
+  
+  .close-btn:hover {
+    color: red;
+  }
+  
+  .modal-content {
+    margin-bottom: 16px;
+  }
+  
+  .input-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  
