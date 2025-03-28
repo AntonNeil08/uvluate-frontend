@@ -1,0 +1,80 @@
+/* Main container */
+.manage-subjects-container {
+    background: #1E3A28;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    margin: auto;
+    color: #F8FFF4;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    color: #A8E063;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+/* Buttons */
+.add-subject-btn {
+    background-color: #28A745 !important;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.add-subject-btn:hover {
+    background-color: #218838 !important;
+}
+
+/* Ant Design Table */
+.ant-table {
+    background: #2C5D3F !important;
+    color: #F8FFF4 !important;
+    border-radius: 12px;
+}
+
+.ant-table-thead > tr > th {
+    background: #3A6B50 !important;
+    color: #A8E063 !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ant-table-tbody > tr > td {
+    color: #F8FFF4 !important;
+    text-align: center;
+}
+
+/* Actions Buttons */
+.edit-btn {
+    background-color: #F4A261 !important;
+    color: black;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+
+.edit-btn:hover {
+    background-color: #E08D57 !important;
+}
+
+.delete-btn {
+    background-color: #DC3545 !important;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+
+.delete-btn:hover {
+    background-color: #C82333 !important;
+}
+
+/* Modal */
+.ant-modal-content {
+    background-color: #2C5D3F !
+}

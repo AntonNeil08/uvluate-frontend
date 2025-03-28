@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Form, Input, Table, message } from "antd";
 import { apiGet, apiPost, apiPut, apiDelete } from "../../utils/apiHelper"; // Axios API Helpers
-import "../../styles/managesubjects.css";
+import "../../styles/managesubject.css";
 
 const ManageSubjects = () => {
   const [subjects, setSubjects] = useState([]); // State for subject list
