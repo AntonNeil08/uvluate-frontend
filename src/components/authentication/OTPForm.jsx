@@ -103,11 +103,27 @@ const OTPForm = () => {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
+  
     if (value && index < 5) {
       document.getElementById(`otp-${index + 1}`).focus();
     }
   };
+  
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData("text").trim();
+  
+    if (/^\d{6}$/.test(pastedData)) {
+      setOtp(pastedData.split(""));
+    }
+  };
+
+  const handleKeyDown = (index, e) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      document.getElementById(`otp-${index - 1}`).focus();
+    }
+  };
+  
 
   return (
     <div className={`otp-container ${darkMode ? "otp-dark" : "otp-light"}`}>
@@ -139,13 +155,16 @@ const OTPForm = () => {
         <div className="flex justify-center gap-2 mb-4">
             {otp.map((digit, index) => (
             <Input
-                key={index}
-                id={`otp-${index}`}
-                value={digit}
-                onChange={(e) => handleOTPChange(index, e.target.value)}
-                maxLength={1}
-                className={`otp-input ${darkMode ? "otp-input-dark" : "otp-input-light"}`}
-            />
+            key={index}
+            id={`otp-${index}`}
+            value={digit}
+            onChange={(e) => handleOTPChange(index, e.target.value)}
+            maxLength={1}
+            onPaste={handlePaste} // Added paste event listener
+            onKeyDown={(e) => handleKeyDown(index, e)}
+            className={`otp-input ${darkMode ? "otp-input-dark" : "otp-input-light"}`}
+          />
+          
             ))}
         </div>
 

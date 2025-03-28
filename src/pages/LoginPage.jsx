@@ -6,6 +6,7 @@ import OTPForm from "../components/authentication/OTPForm";
 import { Switch } from "antd";
 import { MoonOutlined, SunOutlined } from "@ant-design/icons";
 import "../styles/loginpage.css";
+import logo from "../assets/uv_logo.png"; // Import logo image
 
 const LoginPage = () => {
   const [showOTP, setShowOTP] = useState(false);
@@ -58,6 +59,7 @@ const LoginPage = () => {
     <div className={`login-page ${darkMode ? "login-page-dark" : "login-page-light"}`}>
       <div className="login-content">
         <div className="welcome-text">
+          <img src={logo} alt="UVluate Logo" className="welcome-logo" /> {/* Logo added */}
           <h1>Hi! Welcome to UVluate</h1>
           <p>An AI-powered platform for faculty performance assessment, fostering feedback-driven improvement.</p>
           <p className="copyright-text">© 2025 UVluate</p>

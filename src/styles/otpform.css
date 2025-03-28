@@ -73,6 +73,10 @@
   @apply w-full transition-all duration-300 font-medium rounded-lg;
 }
 
+.otp-button:hover {
+ background-color: #00be26 !important;
+}
+
 /* Light Mode Button (Green) */
 .otp-button-primary {
   @apply bg-green-500 text-white border-green-600 hover:bg-green-600;

@@ -40,6 +40,7 @@ const LoginForm = ({ onSuccess }) => {
 
     if (response.success) {
       localStorage.setItem("user_id", userId);
+      localStorage.setItem("email", response.data.email);
       localStorage.setItem("username", response.data.username);
       localStorage.setItem("user_type", response.data.user_type);
       localStorage.setItem("first_name", response.data.first_name || "");
@@ -86,7 +87,7 @@ const LoginForm = ({ onSuccess }) => {
           className="login-input"
         />
 
-        <Button type="primary" htmlType="submit" className="login-button" size="large" loading={loading}>
+        <Button type="primary" htmlType="submit" className="login-button" size="large">
           {loading ? <LoadingOutlined /> : "Login"}
         </Button>
       </form>

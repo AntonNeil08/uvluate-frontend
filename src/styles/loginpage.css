@@ -1,13 +1,14 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000');
 
 /* 🔹 Login Page Layout */
 .login-page {
   display: flex;
-  justify-content: flex-end; /* Moves content to the right */
+  justify-content: flex-end;
   align-items: center;
   height: 100vh;
-  background-color: #15803d; /* Default background */
-  padding: 0 8%; /* Adjust spacing from the sides */
+  background-color: #15803d;
+  padding: 0 8%;
   gap: 5%;
   transition: background 0.3s ease;
   width: 100%;
@@ -31,15 +32,21 @@
 }
 
 .welcome-text h1 {
+  font-family: 'DM Sans', sans-serif;
   font-size: 2.4rem;
   font-weight: bold;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .welcome-text p {
   margin-top: 10px;
   align-self: center;
-  margin-top: 30px;
+}
+
+/* 🔹 Logo Styling */
+.welcome-logo {
+  width: 120px;
+  display: block;
 }
 
 /* 🔹 Form Container */
@@ -48,18 +55,14 @@
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
-  min-width: 400px; /* Ensures consistent width */
-  max-width: 410px;
+  min-width: 400px;
   height: 403px;
-  
-  /* Flexbox: Centers content inside */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
   transition: all 0.3s ease-in-out;
-  margin-left: auto; /* Pushes the form to the right */
+  margin-left: auto;
 }
 
 /* Dark Mode for Form */
@@ -73,25 +76,14 @@
   color: black;
 }
 
-.copyright-text {
-  align-self: end;
-  bottom: 20px;
-  left: 20px;
-  font-size: 14px;
-  color: #fff; /* Adjust color based on theme */
-  
-}
-
-
 /* 🔹 Theme Toggle */
 .theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: fixed;
+  top: 15px;
+  right: 25px;
 }
 
 .theme-switch {
-  
   border-radius: 20px;
   padding: 2px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -110,6 +102,13 @@
     padding: 0;
   }
 
+  .welcome-logo {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .welcome-text {
     max-width: 100%;
     position: static;
@@ -125,26 +124,54 @@
   }
 }
 
-/* 🔹 Fix Form Alignment */
-.login-wrapper {
-  display: flex;
-  justify-content: flex-end; /* Aligns form to the right */
-  align-items: center;
-  height: 100vh;
-  padding-right: 8%; /* Adjust right spacing */
-  width: 100%;
-}
+@media (max-width: 375px) {
+  .login-page {
+    height: 695px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
 
-/* 🔹 Fix Input Fields */
-.input-field {
-  width: 100%;
-  height: 45px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: white;
-  outline: none;
-  display: flex;
-  align-items: center;
+  .form-container {
+    height: 338px;
+    width: 240px;
+   
+  }
+
+  .welcome-logo {
+    position: absolute;
+    width: 148px;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .welcome-text {
+    max-width: 100%;
+    position: static;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .welcome-text h1 {
+    font-size: 1.25rem;
+    margin-top: 6vh;
+  }
+
+  .welcome-text p {
+    font-size: 0.75rem;
+    margin: 0 10%;
+  }
+
+  .login-content {
+    margin-top: 20vh;
+  }
+
+  .form-container {
+    min-width: 90%;
+    max-width: 90%;
+    padding: 20px;
+    margin: auto;
+  }
 }
