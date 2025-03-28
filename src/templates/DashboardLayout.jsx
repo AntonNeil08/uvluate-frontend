@@ -52,7 +52,6 @@ const DashboardLayout = ({ children }) => {
       setNavigationItems(items);
     } else if (userType === 2) {
       items = [
-        { label: "Dashboard", path: "/dean-dashboard", icon: <DashboardOutlined /> },
         { label: "Coordinators", path: "/dean/coordinators", icon: <TeamOutlined /> },
         { label: "Faculty", path: "/dean/faculty", icon: <UserOutlined /> },
         { label: "Students", path: "/dean/students", icon: <UserOutlined /> },

@@ -44,8 +44,8 @@ const DeanReports = () => {
 
   return (
     <div className="p-4">
-      <Title level={2}>
-        <UserOutlined style={{ marginRight: 8 }} />
+      <Title level={2} className="text-h1" style={{color: "#ffff", fontSize: "24px"}} >
+        <UserOutlined style={{ marginRight: 8, color: "white"}} />
         Instructor Reports
       </Title>
 

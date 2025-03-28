@@ -34,7 +34,7 @@ const NavSidebar = ({ navigationItems, children }) => {
       <div className="navbar">
         <div className="navbar-left">
           <img src={logo} alt="Logo" className="navbar-logo" />
-          {!collapsed && <h1 className="navbar-title">UVluate</h1>}
+          <h1 className="navbar-title">UVluate</h1>
         </div>
         <div className="navbar-actions">
           <Button type="primary" className="logout-button" onClick={handleLogout}>
@@ -69,20 +69,20 @@ const NavSidebar = ({ navigationItems, children }) => {
 
           {/* User Card & Footer */}
           <div className="sidebar-footer">
-            <div className="user-card">
-              <div className="user-info">
-                {!collapsed && (
-                  <>
-                    <p className="user-name">
-                      {user.first_name} {user.middle_name && user.middle_name + " "} {user.last_name} {user.suffix}
-                    </p>
-                    <p className="user-id">ID: {user.user_id}</p>
-                  </>
-                )}
+            {!collapsed ? (
+              <div className="user-card">
+                <div className="user-info">
+                  <p className="user-name">
+                    {user.first_name} {user.middle_name && user.middle_name + " "} {user.last_name} {user.suffix}
+                  </p>
+                  <p className="user-id">ID: {user.user_id}</p>
+                </div>
+                <Button shape="circle" icon={<SettingOutlined />} className="settings-button" />
               </div>
+            ) : (
               <Button shape="circle" icon={<SettingOutlined />} className="settings-button" />
-            </div>
-            {!collapsed && <div className="sidebar-footer-text">© 2025 UVluate</div>}
+            )}
+            <div className="sidebar-footer-text">© 2025 UVluate</div>
           </div>
         </div>
 

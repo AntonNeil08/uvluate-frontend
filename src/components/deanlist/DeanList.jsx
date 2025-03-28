@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { apiGet } from "../../utils/apiHelper";
 import DeanListCard from "./DeansListCard";
 import { Spin, Alert } from "antd";
-import "../../styles/deanslist.css"
+import "../../styles/deanslist.css";
 
 const DeanList = () => {
   const [deans, setDeans] = useState([]);
@@ -26,7 +26,11 @@ const DeanList = () => {
   }, []);
 
   if (loading) {
-    return <div className="flex justify-center items-center h-screen"><Spin size="large" /></div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spin size="large" />
+      </div>
+    );
   }
 
   if (error) {
@@ -43,16 +47,16 @@ const DeanList = () => {
       <div className="dean-list-scroll">
         {deans.length > 0 ? (
           deans.map((dean) => (
-            <DeanListCard 
-              key={dean.id} 
+            <DeanListCard
+              key={dean.id}
               dean={{
                 first_name: dean.first_name.trim(),
-                middle_name: dean.middle_name || "",
-                last_name: dean.last_name,
-                suffix: dean.suffix || "",
+                middle_name: dean.middle_name ? dean.middle_name.trim() : "",
+                last_name: dean.last_name.trim(),
+                suffix: dean.suffix ? dean.suffix.trim() : "",
                 user_id: dean.id,
-                department: dean.department_name
-              }} 
+                department: dean.department_name || "No Department", // Default value for null
+              }}
             />
           ))
         ) : (

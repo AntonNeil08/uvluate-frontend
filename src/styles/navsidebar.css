@@ -120,16 +120,14 @@
   color: white;
 }
 
-/* Sidebar button hover effect */
 .sidebar-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(222, 53, 53, 0.1);
 }
 
 .sidebar-button.active {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Hide text when sidebar is collapsed */
 .sidebar-button span {
   margin-left: 10px;
 }
@@ -138,17 +136,81 @@
   display: none;
 }
 
-/* Center icons when collapsed */
 .sidebar.collapsed .sidebar-button {
   justify-content: center;
 }
 
-/* Hide user info when collapsed */
+/* === User Card === */
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #294E28; /* Changed from gray */
+}
+
+.user-info {
+  text-align: left;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.user-id {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
 .sidebar.collapsed .user-info {
   display: none;
 }
 
-/* Hide footer text when collapsed */
+/* Settings Button (Gear Icon) */
+.settings-button {
+  background-color: transparent;
+  border: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.settings-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.settings-button .anticon {
+  color: white;
+}
+
+/* === Sidebar Footer === */
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Push to bottom */
+  padding: 10px;
+  font-size: 12px;
+  color: #ffffff;
+  flex-grow: 1;
+}
+
+.sidebar-footer .user-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #031a09; /* Changed from gray */
+}
+
+.sidebar-footer .sidebar-footer-text {
+  text-align: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
 .sidebar.collapsed .sidebar-footer-text {
   display: none;
 }
@@ -157,15 +219,20 @@
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  margin-left: 240px; /* Default sidebar width */
+  margin-left: 240px;
   height: calc(100vh - 60px);
   background-color: #031a09; /* Dark green */
-  color: white;
+  color: rgb(0, 0, 0);
   transition: margin-left 0.3s ease-in-out;
   overflow-y: auto;
 }
 
-/* Adjust when sidebar is collapsed */
 .sidebar.collapsed + .main-content {
   margin-left: 80px;
+}
+
+/* === Content Area Inner Padding === */
+.content-area {
+  margin-top: 0;
+  padding: 20px;
 }
